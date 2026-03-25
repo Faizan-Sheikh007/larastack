@@ -1,0 +1,59 @@
+<UserControl x:Class="LaraStack.User.Views.FilesPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BrushBg}">
+  <Grid Margin="26,20">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <StackPanel Grid.Row="0" Margin="0,0,0,18">
+      <TextBlock Text="Files" Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI Semibold" FontSize="20" Margin="0,0,0,4"/>
+      <TextBlock Text="Browse your web root (www/) folder" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="12"/>
+    </StackPanel>
+
+    <!-- Path bar -->
+    <Grid Grid.Row="1" Margin="0,0,0,14">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="8"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="8"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="8"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="8"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <Button Content="↑ Up" Style="{StaticResource BtnGhost}" Padding="12,8" Click="Up_Click" x:Name="UpBtn" IsEnabled="False"/>
+      <Button Grid.Column="2" Content="↺ Refresh" Style="{StaticResource BtnGhost}" Padding="12,8" Click="Refresh_Click"/>
+      <TextBox Grid.Column="4" x:Name="PathBar" Style="{StaticResource TxtBox}" IsReadOnly="True"/>
+      <Button Grid.Column="6" Content="🗁 Explorer" Style="{StaticResource BtnGhost}" Padding="12,8" Click="OpenExplorer_Click"/>
+      <Button Grid.Column="8" Content="+ New File" Style="{StaticResource BtnPrimary}" Padding="14,8" Click="NewFile_Click"/>
+    </Grid>
+
+    <!-- File list -->
+    <Border Grid.Row="2" Style="{StaticResource Card}" Padding="0" ClipToBounds="True">
+      <ListView x:Name="FileList" Background="Transparent" BorderThickness="0"
+                MouseDoubleClick="FileList_DoubleClick">
+        <ListView.View>
+          <GridView>
+            <GridViewColumn Header="Name"     Width="350" DisplayMemberBinding="{Binding Name}"/>
+            <GridViewColumn Header="Type"     Width="80"  DisplayMemberBinding="{Binding Type}"/>
+            <GridViewColumn Header="Size"     Width="100" DisplayMemberBinding="{Binding Size}"/>
+            <GridViewColumn Header="Modified" Width="160" DisplayMemberBinding="{Binding Modified}"/>
+          </GridView>
+        </ListView.View>
+        <ListView.ItemContainerStyle>
+          <Style TargetType="ListViewItem">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize"   Value="12"/>
+            <Setter Property="Padding"    Value="8,6"/>
+          </Style>
+        </ListView.ItemContainerStyle>
+      </ListView>
+    </Border>
+  </Grid>
+</UserControl>

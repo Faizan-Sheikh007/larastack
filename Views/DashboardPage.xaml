@@ -1,0 +1,200 @@
+<UserControl x:Class="LaraStack.User.Views.DashboardPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BrushBg}">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="26,20">
+
+      <!-- Hero banner -->
+      <Border CornerRadius="18" Padding="26,22" Margin="0,0,0,20" BorderThickness="1">
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#060D3A" Offset="0"/>
+            <GradientStop Color="#0A1FA8" Offset="0.55"/>
+            <GradientStop Color="#1E3A8A" Offset="1"/>
+          </LinearGradientBrush>
+        </Border.Background>
+        <Border.BorderBrush><SolidColorBrush Color="#1E3A8A" Opacity="0.5"/></Border.BorderBrush>
+        <Grid>
+          <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <StackPanel>
+            <TextBlock Text="Welcome to LaraStack 🦅" Foreground="White"
+                       FontFamily="Segoe UI Semibold" FontSize="22" Margin="0,0,0,6"/>
+            <TextBlock x:Name="HeroBannerSub" Text="Your local web server is ready"
+                       Foreground="#87CEFA" FontFamily="Segoe UI" FontSize="12"/>
+            <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+              <Button x:Name="BtnOpenWeb" Content="🌐  Open Website" Style="{StaticResource BtnGhost}"
+                      Padding="14,9" Margin="0,0,10,0" BorderBrush="#1E3A8A" Foreground="#87CEFA"
+                      Click="OpenWeb_Click"/>
+              <Button Content="🗄  phpMyAdmin" Style="{StaticResource BtnGhost}"
+                      Padding="14,9" Margin="0,0,10,0" BorderBrush="#1E3A8A" Foreground="#87CEFA"
+                      Click="OpenPma_Click"/>
+              <Button Content="📟  PHP Terminal" Style="{StaticResource BtnGhost}"
+                      Padding="14,9" Margin="0,0,10,0" BorderBrush="#1E3A8A" Foreground="#87CEFA"
+                      Click="OpenTerminal_Click"/>
+              <Button x:Name="BtnStartAll" Content="▶  Start All" Style="{StaticResource BtnGreen}"
+                      Padding="14,9" Click="StartAll_Click"/>
+            </StackPanel>
+          </StackPanel>
+
+          <!-- Status mini-panel -->
+          <Border Grid.Column="1" CornerRadius="14" Padding="18,14" VerticalAlignment="Center" Margin="16,0,0,0">
+            <Border.Background><SolidColorBrush Color="#1E3A8A" Opacity="0.45"/></Border.Background>
+            <StackPanel MinWidth="160">
+              <TextBlock Text="SERVER STATUS" Foreground="#4A5C99" FontFamily="Segoe UI"
+                         FontSize="9" FontWeight="SemiBold" Margin="0,0,0,10"/>
+              <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                <Ellipse x:Name="PhpDot" Width="8" Height="8" Fill="#E53935" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <TextBlock x:Name="PhpStatusTxt" Text="PHP — not running" Foreground="#8A96C0" FontFamily="Segoe UI" FontSize="12"/>
+              </StackPanel>
+              <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                <Ellipse x:Name="SqlDot" Width="8" Height="8" Fill="#E53935" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <TextBlock x:Name="SqlStatusTxt" Text="MySQL — not running" Foreground="#8A96C0" FontFamily="Segoe UI" FontSize="12"/>
+              </StackPanel>
+              <StackPanel Orientation="Horizontal">
+                <Ellipse x:Name="PmaDot" Width="8" Height="8" Fill="#E53935" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <TextBlock x:Name="PmaStatusTxt" Text="phpMyAdmin — stopped" Foreground="#8A96C0" FontFamily="Segoe UI" FontSize="12"/>
+              </StackPanel>
+            </StackPanel>
+          </Border>
+        </Grid>
+      </Border>
+
+      <!-- Quick access cards -->
+      <TextBlock Text="QUICK ACCESS" Foreground="{StaticResource BrushTextSub}"
+                 FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold" Margin="0,0,0,12"/>
+      <Grid Margin="0,0,0,20">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="12"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="12"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="12"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Website -->
+        <Border Grid.Column="0" Style="{StaticResource Card}" Padding="18,16">
+          <StackPanel>
+            <Border Width="42" Height="42" CornerRadius="11" Margin="0,0,0,10" Background="#EEF4FF" HorizontalAlignment="Left">
+              <TextBlock Text="🌐" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <TextBlock Text="Website" Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI Semibold" FontSize="13" Margin="0,0,0,3"/>
+            <TextBlock x:Name="WebUrlTxt" Text="http://localhost:8080" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="10" TextTrimming="CharacterEllipsis" Margin="0,0,0,12"/>
+            <Button Content="Open →" Style="{StaticResource BtnPrimary}" HorizontalAlignment="Left" Padding="12,7" FontSize="11" Click="OpenWeb_Click"/>
+          </StackPanel>
+        </Border>
+
+        <!-- phpMyAdmin — shows real URL with port -->
+        <Border Grid.Column="2" Style="{StaticResource Card}" Padding="18,16">
+          <StackPanel>
+            <Border Width="42" Height="42" CornerRadius="11" Margin="0,0,0,10" Background="#F5F0FF" HorizontalAlignment="Left">
+              <TextBlock Text="🗄" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <TextBlock Text="phpMyAdmin" Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI Semibold" FontSize="13" Margin="0,0,0,3"/>
+            <!-- Shows the actual URL so user knows the port -->
+            <TextBlock x:Name="PmaUrlTxt" Text="http://localhost:8081" Foreground="{StaticResource BrushPurple}"
+                       FontFamily="Segoe UI" FontSize="10" TextTrimming="CharacterEllipsis" Margin="0,0,0,12"/>
+            <Button Content="Open →" Style="{StaticResource BtnGhost}" HorizontalAlignment="Left" Padding="12,7" FontSize="11" Click="OpenPma_Click"/>
+          </StackPanel>
+        </Border>
+
+        <!-- PHP Terminal — opens cmd.exe with PHP in PATH immediately -->
+        <Border Grid.Column="4" Style="{StaticResource Card}" Padding="18,16">
+          <StackPanel>
+            <!-- Terminal icon: navy rounded square with >_ symbol -->
+            <Border Width="42" Height="42" CornerRadius="11" Margin="0,0,0,10" Background="#0F1B4D" HorizontalAlignment="Left">
+              <Grid>
+                <Polyline Points="8,12 16,21 8,30" Stroke="#00CB71" StrokeThickness="2.5"
+                          StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round"
+                          HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <Rectangle Width="9" Height="2" Fill="#00CB71" RadiusX="1" RadiusY="1"
+                           HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6,7,0"/>
+              </Grid>
+            </Border>
+            <TextBlock Text="PHP Terminal" Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI Semibold" FontSize="13" Margin="0,0,0,3"/>
+            <TextBlock Text="Opens cmd with PHP in PATH" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="10" Margin="0,0,0,10"/>
+            <StackPanel Orientation="Horizontal">
+              <Button Content="Open →" Style="{StaticResource BtnGhost}" HorizontalAlignment="Left" Padding="10,6" FontSize="11" Click="OpenTerminal_Click" Margin="0,0,6,0"/>
+              <Button x:Name="BtnAddToPath" Content="+ PATH" Style="{StaticResource BtnGreen}" HorizontalAlignment="Left" Padding="10,6" FontSize="11" Click="AddPhpToPath_Click"
+                      ToolTip="Permanently add PHP to your Windows PATH so any CMD window can use it"/>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <!-- Installer quick-check -->
+        <Border Grid.Column="6" Style="{StaticResource Card}" Padding="18,16">
+          <StackPanel>
+            <Border Width="42" Height="42" CornerRadius="11" Margin="0,0,0,10" Background="#E8FFF4" HorizontalAlignment="Left">
+              <TextBlock Text="⬇" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <TextBlock Text="Installer" Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI Semibold" FontSize="13" Margin="0,0,0,3"/>
+            <TextBlock x:Name="InstallStatusTxt" Text="Checking…" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="10" Margin="0,0,0,12"/>
+            <Button Content="Install →" Style="{StaticResource BtnGhost}" HorizontalAlignment="Left" Padding="12,7" FontSize="11" Click="GoInstall_Click"/>
+          </StackPanel>
+        </Border>
+      </Grid>
+
+      <!-- Server info -->
+      <TextBlock Text="SERVER INFO" Foreground="{StaticResource BrushTextSub}"
+                 FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold" Margin="0,0,0,12"/>
+      <Border Style="{StaticResource Card}" Padding="20,16" Margin="0,0,0,20">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <StackPanel>
+            <TextBlock Text="PHP PORT" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold" Margin="0,0,0,4"/>
+            <TextBlock x:Name="PhpPortTxt" Text="8080" Foreground="{StaticResource BrushGreen}" FontFamily="Segoe UI Black" FontSize="26"/>
+          </StackPanel>
+          <StackPanel Grid.Column="1">
+            <TextBlock Text="PHPMYADMIN PORT" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold" Margin="0,0,0,4"/>
+            <TextBlock x:Name="PmaPortTxt" Text="8081" Foreground="{StaticResource BrushPurple}" FontFamily="Segoe UI Black" FontSize="26"/>
+          </StackPanel>
+          <StackPanel Grid.Column="2">
+            <TextBlock Text="MYSQL PORT" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold" Margin="0,0,0,4"/>
+            <TextBlock x:Name="MySqlPortTxt" Text="3306" Foreground="{StaticResource BrushPurple}" FontFamily="Segoe UI Black" FontSize="26"/>
+          </StackPanel>
+          <StackPanel Grid.Column="3">
+            <TextBlock Text="ROOT USER" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold" Margin="0,0,0,4"/>
+            <TextBlock Text="root (no password)" Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI" FontSize="13"/>
+          </StackPanel>
+          <StackPanel Grid.Column="4">
+            <TextBlock Text="WEB ROOT" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold" Margin="0,0,0,4"/>
+            <TextBlock x:Name="WebRootTxt" Text="..." Foreground="{StaticResource BrushBlue}" FontFamily="Segoe UI" FontSize="11" TextTrimming="CharacterEllipsis"/>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- Recent logs -->
+      <TextBlock Text="RECENT LOGS" Foreground="{StaticResource BrushTextSub}"
+                 FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold" Margin="0,0,0,12"/>
+      <Border Style="{StaticResource Card}" Padding="16">
+        <ListBox x:Name="LogList" Background="Transparent" BorderThickness="0"
+                 MaxHeight="150" FontFamily="Consolas" FontSize="11"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+          <ListBox.ItemContainerStyle>
+            <Style TargetType="ListBoxItem">
+              <Setter Property="Background" Value="Transparent"/>
+              <Setter Property="BorderThickness" Value="0"/>
+              <Setter Property="Padding" Value="0,3"/>
+            </Style>
+          </ListBox.ItemContainerStyle>
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding TimestampStr}" Foreground="#CBD5E1" Width="58"/>
+                <Border Background="#EEF1F8" CornerRadius="3" Padding="5,1" Margin="0,0,8,0">
+                  <TextBlock Text="{Binding LevelTag}" Foreground="{Binding LevelBrush}" FontSize="9"/>
+                </Border>
+                <TextBlock Text="{Binding Message}" Foreground="{StaticResource BrushTextSub}" TextTrimming="CharacterEllipsis"/>
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

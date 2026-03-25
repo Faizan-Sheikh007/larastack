@@ -1,0 +1,121 @@
+<UserControl x:Class="LaraStack.User.Views.ServicesPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BrushBg}">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="26,20">
+      <TextBlock Text="Services" Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI Semibold" FontSize="20" Margin="0,0,0,4"/>
+      <TextBlock Text="Start, stop, and manage PHP and MySQL" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="12" Margin="0,0,0,22"/>
+
+      <!-- PHP -->
+      <Border Style="{StaticResource Card}" Padding="22,20" Margin="0,0,0,16">
+        <StackPanel>
+          <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+              <Border Width="46" Height="46" CornerRadius="12" Margin="0,0,14,0" Background="#E8FFF4">
+                <TextBlock Text="🐘" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+              <StackPanel VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                  <TextBlock Text="PHP Built-in Server" Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI Semibold" FontSize="15"/>
+                  <Border x:Name="PhpBadge" CornerRadius="6" Padding="8,2" Margin="12,0,0,0" Background="#EEF1F8" VerticalAlignment="Center">
+                    <TextBlock x:Name="PhpBadgeTxt" Text="STOPPED" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI Semibold" FontSize="10"/>
+                  </Border>
+                </StackPanel>
+                <TextBlock x:Name="PhpBinTxt" Text="" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="11" TextTrimming="CharacterEllipsis"/>
+              </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+              <Button x:Name="PhpStartBtn" Content="▶ Start"   Style="{StaticResource BtnPrimary}" Padding="14,9" Margin="0,0,8,0" Click="PhpStart_Click"/>
+              <Button x:Name="PhpStopBtn"  Content="■ Stop"    Style="{StaticResource BtnDanger}"  Padding="14,9" Margin="0,0,8,0" Click="PhpStop_Click" IsEnabled="False"/>
+              <Button x:Name="PhpRestBtn"  Content="↺"         Style="{StaticResource BtnGhost}"   Width="38" Padding="0,9"        Click="PhpRestart_Click" IsEnabled="False"/>
+            </StackPanel>
+          </Grid>
+          <Border x:Name="PhpMissing" Background="#FEF2F2" BorderBrush="#FECACA" BorderThickness="1" CornerRadius="8" Padding="12,8" Margin="0,0,0,12" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="⚠  PHP not installed. " Foreground="#DC2626" FontFamily="Segoe UI" FontSize="11"/>
+              <Button Content="Go to Installer →" Background="Transparent" BorderThickness="0" Foreground="#2255DD"
+                      FontFamily="Segoe UI Semibold" FontSize="11" Cursor="Hand" Padding="0" Click="GoInstall_Click"/>
+            </StackPanel>
+          </Border>
+          <Separator Background="{StaticResource BrushBorder}" Margin="0,0,0,14"/>
+          <Grid>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+            <StackPanel>
+              <TextBlock Text="PORT" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold"/>
+              <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="PhpPortTxt" Text="8080" Foreground="{StaticResource BrushGreen}" FontFamily="Segoe UI Semibold" FontSize="20"/>
+                <TextBox x:Name="PhpPortBox" Width="60" Margin="8,2,0,0" Style="{StaticResource TxtBox}" FontSize="12" Padding="6,4"
+                         LostFocus="PhpPortBox_LostFocus"/>
+              </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+              <TextBlock Text="DOCUMENT ROOT" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold"/>
+              <TextBlock x:Name="PhpRootTxt" Text="..." Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI" FontSize="12" TextTrimming="CharacterEllipsis"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+              <TextBlock Text="URL" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold"/>
+              <TextBlock x:Name="PhpUrlTxt" Text="http://localhost:8080" Foreground="{StaticResource BrushBlue}" FontFamily="Segoe UI" FontSize="12"/>
+            </StackPanel>
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <!-- MySQL -->
+      <Border Style="{StaticResource Card}" Padding="22,20">
+        <StackPanel>
+          <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+              <Border Width="46" Height="46" CornerRadius="12" Margin="0,0,14,0" Background="#F5F0FF">
+                <TextBlock Text="🐬" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Border>
+              <StackPanel VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                  <TextBlock Text="MySQL Server" Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI Semibold" FontSize="15"/>
+                  <Border x:Name="MySqlBadge" CornerRadius="6" Padding="8,2" Margin="12,0,0,0" Background="#EEF1F8" VerticalAlignment="Center">
+                    <TextBlock x:Name="MySqlBadgeTxt" Text="STOPPED" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI Semibold" FontSize="10"/>
+                  </Border>
+                </StackPanel>
+                <TextBlock x:Name="MySqlBinTxt" Text="" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="11" TextTrimming="CharacterEllipsis"/>
+              </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+              <Button x:Name="MySqlStartBtn" Content="▶ Start"   Style="{StaticResource BtnPurple}" Padding="14,9" Margin="0,0,8,0" Click="MySqlStart_Click"/>
+              <Button x:Name="MySqlStopBtn"  Content="■ Stop"    Style="{StaticResource BtnDanger}" Padding="14,9" Margin="0,0,8,0" Click="MySqlStop_Click" IsEnabled="False"/>
+              <Button x:Name="MySqlRestBtn"  Content="↺"         Style="{StaticResource BtnGhost}"  Width="38" Padding="0,9"        Click="MySqlRestart_Click" IsEnabled="False"/>
+            </StackPanel>
+          </Grid>
+          <Border x:Name="MySqlMissing" Background="#FEF2F2" BorderBrush="#FECACA" BorderThickness="1" CornerRadius="8" Padding="12,8" Margin="0,0,0,12" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="⚠  MySQL not installed. " Foreground="#DC2626" FontFamily="Segoe UI" FontSize="11"/>
+              <Button Content="Go to Installer →" Background="Transparent" BorderThickness="0" Foreground="#2255DD"
+                      FontFamily="Segoe UI Semibold" FontSize="11" Cursor="Hand" Padding="0" Click="GoInstall_Click"/>
+            </StackPanel>
+          </Border>
+          <Separator Background="{StaticResource BrushBorder}" Margin="0,0,0,14"/>
+          <Grid>
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+            <StackPanel>
+              <TextBlock Text="PORT" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold"/>
+              <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="MySqlPortTxt" Text="3306" Foreground="{StaticResource BrushPurple}" FontFamily="Segoe UI Semibold" FontSize="20"/>
+                <TextBox x:Name="MySqlPortBox" Width="60" Margin="8,2,0,0" Style="{StaticResource TxtBox}" FontSize="12" Padding="6,4"
+                         LostFocus="MySqlPortBox_LostFocus"/>
+              </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+              <TextBlock Text="DATA DIR" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold"/>
+              <TextBlock x:Name="MySqlDataTxt" Text="..." Foreground="{StaticResource BrushNavy}" FontFamily="Segoe UI" FontSize="12" TextTrimming="CharacterEllipsis"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+              <TextBlock Text="ROOT PASSWORD" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="9" FontWeight="SemiBold"/>
+              <TextBlock Text="(none)" Foreground="{StaticResource BrushTextSub}" FontFamily="Segoe UI" FontSize="12"/>
+            </StackPanel>
+          </Grid>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

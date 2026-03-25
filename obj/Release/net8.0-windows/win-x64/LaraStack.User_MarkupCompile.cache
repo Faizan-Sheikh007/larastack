@@ -1,0 +1,20 @@
+﻿LaraStack.User
+
+
+winexe
+C#
+.cs
+F:\ORISERVE USER\LaraStack.User\obj\Release\net8.0-windows\win-x64\
+LaraStack.User
+none
+false
+TRACE;RELEASE;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+F:\ORISERVE USER\LaraStack.User\App.xaml
+10198827627
+
+191852987489
+209577468739
+MainWindow.xaml;Views\AnnouncementPopup.xaml;Views\DashboardPage.xaml;Views\DatabasePage.xaml;Views\FilesPage.xaml;Views\InstallerPage.xaml;Views\LogsPage.xaml;Views\MonitorPage.xaml;Views\PhpIniPage.xaml;Views\ServicesPage.xaml;
+
+False
+

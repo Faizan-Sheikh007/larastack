@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>LaraStack.User</AssemblyName>
+    <RootNamespace>LaraStack.User</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>x64</Platforms>
+    <AssemblyTitle>LaraStack</AssemblyTitle>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Company>CyberOrion.pk</Company>
+    <Product>LaraStack</Product>
+    <Description>LaraStack User Dashboard</Description>
+    <Version>2.0.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="logo.png" />
+    <Resource Include="left.png" />
+    <Resource Include="right.png" />
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+
+  <!-- Publish profile: dotnet publish -p:PublishProfile=win-x64 -->
+  <PropertyGroup Condition="'$(PublishProfile)' == 'win-x64'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+
+</Project>
